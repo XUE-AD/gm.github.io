@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "target": "ES6",                        // 指定 ECMAScript 目標版本
+      "module": "commonjs",                   // 指定模塊系統
+      "rootDir": "./src",                     // 指定輸入文件的根目錄
+      "outDir": "./dist",                     // 指定輸出文件的目錄
+      "strict": true,                         // 啟用所有嚴格的類型檢查選項
+      "esModuleInterop": true,                // 允許對 CommonJS 模塊進行命名空間導入
+      "forceConsistentCasingInFileNames": true, // 強制文件名一致性
+      "skipLibCheck": true                    // 跳過類型聲明文件的類型檢查
+    },
+    "include": ["src/**/*"],                   // 包含的文件
+    "exclude": ["node_modules", "dist"]        // 排除的文件
+  }
+  

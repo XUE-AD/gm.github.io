@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Meeting Reservation</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker3.min.css"
+			integrity="sha512-aQb0/doxDGrw/OC7drNaJQkIKFu6eSWnVMAwPN64p6sZKeJ4QCDYL42Rumw2ZtL8DB9f66q4CnLIUnAw28dEbg=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+		<script
+			src="https://code.jquery.com/jquery-3.7.1.min.js"
+			integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+			crossorigin="anonymous"
+		></script>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"
+			integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script 
+			scr="..\main.js" 
+			defer type="module"
+		></script>
+		<style>
+			.input-group.col-2 {
+				width: auto;
+			}
+			.datepicker {
+				left: 200px !important;
+				transform-origin: top left;
+				transform: scale(1.2) !important;
+			}
+			@media screen and (max-width: 450px) {
+				.datag.row.customs {
+					flex-wrap: wrap !important;
+					row-gap: 10px;
+				}
+				.datag.row.customs .col-6 {
+					width: 50% !important;
+					flex-wrap: wrap !important;
+				}
+				.datag.row.customs .__select {
+					width: 50% !important;
+					flex-wrap: wrap !important;
+				}
+				.datag.row.customs .__select {
+					width: 50% !important;
+					flex-wrap: wrap !important;
+				}
+				.datepicker {
+					left: 100px !important;
+					transform: scale(1.1) !important;
+				}
+			}
+			#progress-container {
+				width: 100%;
+				background-color: #f3f3f3;
+				border: 1px solid #ccc;
+       		}
+
+        	#progress-bar {
+				width: 0;
+				height: 30px;
+				background-color: #4caf50;
+				text-align: center;
+				color: white;
+        	}
+			
+		</style>
+		<script>
+			// $(function () {
+			// 	$('#datepicker').datepicker({
+			// 		changeMonth: true,
+			// 		changeYear: true,
+			// 		showMonthAfterYear: true,
+			// 	});
+			// });
+
+			// $(function () {
+			// 	(function (factory) {
+			// 		if (typeof define === 'function' && define.amd) {
+			// 			define(['../widgets/datepicker'], factory);
+			// 		} else {
+			// 			factory(jQuery.datepicker);
+			// 		}
+			// 	})(function (datepicker) {
+			// 		datepicker.regional['zh-TW'] = {
+			// 			closeText: 'Close',
+			// 			prevText: '&#x3C;Previous',
+			// 			nextText: 'Next&#x3E;',
+			// 			currentText: 'Today',
+			// 			monthNames: [
+			// 				'January',
+			// 				'February',
+			// 				'March',
+			// 				'April',
+			// 				'May',
+			// 				'June',
+			// 				'July',
+			// 				'August',
+			// 				'September',
+			// 				'October',
+			// 				'November',
+			// 				'December',
+			// 			],
+			// 			monthNamesShort: [
+			// 				'Jan',
+			// 				'Feb',
+			// 				'Mar',
+			// 				'Apr',
+			// 				'May',
+			// 				'Jun',
+			// 				'Jul',
+			// 				'Aug',
+			// 				'Sep',
+			// 				'Oct',
+			// 				'Nov',
+			// 				'Dec',
+			// 			],
+			// 			dayNames: [
+			// 				'Sunday',
+			// 				'Monday',
+			// 				'Tuesday',
+			// 				'Wednesday',
+			// 				'Thursday',
+			// 				'Friday',
+			// 				'Saturday',
+			// 			],
+			// 			dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+			// 			dayNamesMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+			// 			weekHeader: 'week',
+			// 			dateFormat: 'yy-mm-dd',
+			// 			firstDay: 1,
+			// 			isRTL: false,
+			// 			showMonthAfterYear: true,
+			// 		};
+			// 		datepicker.setDefaults(datepicker.regional['zh-TW']);
+			// 		return datepicker.regional['zh-TW'];
+			// 	});
+			// });
+
+			function showInput() {
+				const title = $('#title').val();
+				const date = $('#datepicker').val();
+				const startHour = $('#start-hour-selector').val();
+				const endHour = $('#end-hour-selector').val();
+				const teacherEmail = $('#teacher-email').val();
+				const studentEmail = $('#student-email').val();
+				const confirmMessage = `Title: ${title}\nDate: ${date} ${startHour} to ${endHour}\nTeacher email: ${teacherEmail}\nStudent email: ${studentEmail}`;
+				if (confirm(confirmMessage + '\n\nAre these details correct?')) {
+					document.getElementById('result').innerText = confirmMessage;
+					processInput(title, date, startHour, endHour, teacherEmail, studentEmail);
+				} else {
+					document.getElementById('result').innerText = '';
+				}
+			}
+
+			function generateTimeOptions() {
+				const selectStart = document.getElementById('start-hour-selector');
+				const selectEnd = document.getElementById('end-hour-selector');
+				for (let i = 0; i < 24; i++) {
+					for (let j = 0; j < 60; j += 15) {
+						const hour = i % 12 === 0 ? 12 : i % 12;
+						const minute = j === 0 ? '00' : j;
+						const ampm = i < 12 ? 'AM' : 'PM';
+						const time = `${hour}:${minute}${ampm}`;
+						const optionStart = document.createElement('option');
+						const optionEnd = document.createElement('option');
+						optionStart.value = time;
+						optionStart.text = time;
+						optionEnd.value = time;
+						optionEnd.text = time;
+						selectStart.appendChild(optionStart);
+						selectEnd.appendChild(optionEnd);
+					}
+				}
+
+				const now = new Date();
+				const currentHour = now.getHours();
+				const nextHour = currentHour + 1;
+				const nextTwoHours = currentHour + 2;
+
+				selectStart.value = `${nextHour % 12 === 0 ? 12 : nextHour % 12}:00${
+					nextHour < 12 ? 'AM' : 'PM'
+				}`;
+				selectEnd.value = `${nextTwoHours % 12 === 0 ? 12 : nextTwoHours % 12}:00${
+					nextTwoHours < 12 ? 'AM' : 'PM'
+				}`;
+
+				$('#datepicker').datepicker('setDate', now);
+			}
+
+			window.onload = generateTimeOptions;
+
+			function processInput(title, date, startHour, endHour, teacherEmail, studentEmail) {
+				fetch('/process-input', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						title,
+						date,
+						startHour,
+						endHour,
+						teacherEmail,
+						studentEmail,
+					}),
+				})
+					.then((response) => response.text())
+					.then((data) => console.log(data))
+					.catch((error) => console.error('Error:', error));
+			}
+		</script>
+	</head>
+	<body class="container">
+		<h1 class="fs-1">Meeting Reservation</h1>
+		<div class="datetest d-flex flex-column column-gap-5">
+			<div
+				class="datag col p-2 row justify-content-start align-items-stretch flex-nowrap input-group"
+			>
+				<label class="col-2 col-md-1 col-sm-2 col-xs-2 input-group-text">Title:</label>
+
+				<input
+					type="text"
+					id="title"
+					class="col-11 form-control"
+					value="業師諮詢"
+					name="title"
+				/>
+			</div>
+			<div
+				class="datag col p-2 row justify-content-start align-items-stretch flex-nowrap input-group customs"
+			>
+				<label class="col-2 col-md-1 col-sm-2 col-xs-2 input-group-text">Date:</label>
+				<input
+					type="text"
+					id="datepicker"
+					data-provide="datepicker"
+					class="col-6 form-control"
+					data-date-format="yyyy-mm-dd"
+					value=""
+					name="datepicker"
+				/>
+				<div class="input-group col-2 __select">
+					<select
+						id="start-hour-selector"
+						class="time-selector form-select"
+					></select>
+				</div>
+				<div class="input-group col-2 __select">
+					<select
+						id="end-hour-selector"
+						class="time-selector form-select"
+					></select>
+				</div>
+			</div>
+			<div
+				class="datag col p-2 row justify-content-start align-items-stretch flex-nowrap input-group"
+			>
+				<label class="col-lg-2 col-3 text-nowrap input-group-text fs-6">
+					Teacher email:
+				</label>
+				<input
+					type="email"
+					id="teacher-email"
+					class="col-10 form-control"
+					value="crazyadam800820@gmail.com"
+					name="teacher-email"
+				/>
+			</div>
+			<div
+				class="datag col p-2 row justify-content-start align-items-stretch flex-nowrap input-group"
+			>
+				<label class="col-lg-2 col-3 text-nowrap input-group-text fs-6">
+					Student email:
+				</label>
+
+				<input
+					type="email"
+					id="student-email"
+					class="col-10 form-control"
+					value=""
+					name="student-email"
+				/>
+			</div>
+			<button
+				class="col-10 align-self-center btn btn-primary m-2"
+				onclick="showInput()"
+			>
+				Submit
+			</button>
+		</div>
+		<div
+			id="result"
+			style="margin-top: 20px; white-space: pre-wrap"
+		></div>
+		<progress id="progressBar" max="100" value="0"></progress>
+		<span id="percentage">0%</span>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+			crossorigin="anonymous"
+		></script>
+		
+	</body>
+</html>

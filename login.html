@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head><title>Google Login</title><style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+  .login-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  .google-btn {
+    display: inline-flex;
+    align-items: center;
+    background-color: #4285F4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .google-btn:hover {
+    background-color: #357ae8;
+  }
+  .google-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+</style>
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+</head>
+<body>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-auth-compat.js"></script>
+  <script src="./firebaseConfig.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+  <div  id="firebaseui-auth-container"></div>
+
+    
+  </div>
+  <script>
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    var uiConfig = {
+
+    // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+    signInFlow: 'popup',
+    signInSuccessUrl: 'http://localhost:5500/',
+    signInOptions: [
+      // Leave the lines as is for the providers you want to offer your users.
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID
+    ],
+    // Terms of service url.
+    tosUrl: '/term.html',
+    // Privacy policy url.
+    privacyPolicyUrl: 'Privacy.html'
+  };
+    ui.start('#firebaseui-auth-container', uiConfig);
+    // const provider = new GoogleAuthProvider(app);
+    // const googleLogin = document.getElementsByClassName("google-btn")
+    // googleLogin.addEventListener('click', (e) => {
+    // console.log(e.target)
+    // // signInWithRedirect(auth, provider);
+    // signInWithPopup(auth, provider)
+    // .then((result) => {
+    //     console.log(result)
+    //     const credential = GoogleAuthProvider.credentialFromResult(result);
+    //     const token = credential.accessToken;
+    //     const user = result.user;
+    //     window.location.href = "http://localhost:3000/";
+    //     alert(user.displayName);
+  
+    // })
+    // .catch((error) => {
+    //     // Handle Errors here.
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     // The email of the user's account used.
+    //     const email = error.email;
+    //     // The AuthCredential type that was used.
+    //     const credential = GoogleAuthProvider.credentialFromError(error);
+    //     // ...
+  
+    //     alert(errorMessage);
+    // });
+  // });
+  </script>
+
+  
+  <script>
+    // function signInWithPopup() {
+    //   alert("Success!");
+    //   window.location.href = "http://localhost:3000/";
+    // }
+  </script>
+</body></html>

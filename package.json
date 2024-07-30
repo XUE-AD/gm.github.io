@@ -2,6 +2,7 @@
   "name": "gm-reservation",
   "version": "1.3.0",
   "description": "A brief description of your project",
+  "homepage": "https://xue-ad.github.io/gm.github.io",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

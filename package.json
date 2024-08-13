@@ -29,5 +29,6 @@
   },
   "engines":{
     "node": "^21.0.0"
-  }
+  },
+  "packageManager": "yarn@1.22.10"
 }

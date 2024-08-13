@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const { processInput } = require('./action.js');
 
 const app = express();
-const port = 3000;
+
 
 // 设置静态文件目录
 app.use(express.static('public'));
@@ -18,9 +18,4 @@ app.post('/process-input', (req, res) => {
             res.status(500).send('Error');
         });
 });
-
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}/`);
-    });
-
     
